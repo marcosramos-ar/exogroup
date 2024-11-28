@@ -1,0 +1,365 @@
+/* FONTS */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+.roboto-regular {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.roboto-medium {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.roboto-bold {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* GLOBAL STYLES */
+
+* {
+    margin: 0;
+    padding: 0;
+    line-height: normal;
+    box-sizing: border-box;
+}
+
+html, body {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+body {
+    background-color: black;
+    background-image: url("../img/background.jpg");
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: "Roboto", sans-serif;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(40 40 40 / 90%);
+    z-index: -1;
+}
+
+/* ELEMENTS */
+
+.container {
+    display: block;
+    margin: 10vh auto 0 auto;
+    width: 100%;
+    max-width: 1024px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.brand {
+    margin-bottom: 4vh;
+}
+
+.progress-bar {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 270px;
+    padding: 25px;
+    border-radius: 8px;
+    background-color: white;
+    margin-bottom: 4vh;
+}
+
+.progress-bar .title {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 19px;
+    color: #22DAA8;
+    margin-bottom: 20px;
+}
+
+.progress-bar .circles {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.progress-bar .circles div {
+    display: block;
+    width: 18px;
+    height: 18px;
+    border: solid 2px #22DAA8;
+    background-color: #22daa900;
+    border-radius: 18px;
+    margin: 0 10px;
+    transition: background-color ease-in-out 0.2s;
+}
+
+.progress-bar .circles div.active {
+    background-color: #22DAA8;
+}
+
+.content h2 {
+    font-size: 34px;
+    text-align: center;
+    color: white;
+    margin-bottom: 4vh;
+}
+
+.content .box-movies {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2vw;
+}
+
+.content {
+    margin: 0 20px;
+}
+
+.content .box-movies div.item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 220px;
+    aspect-ratio: 4 / 5.5;
+    background-color: rgb(19, 19, 19);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.content .box-movies div.item.appear {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.content .box-movies div.item img {
+    width: 100%;
+}
+
+.content .box-movies div.item::before {
+    content: "";
+    opacity: 0;
+    position: absolute;
+    display: block;   
+    width: 100%;
+    height: 100%; 
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(180deg, rgb(255 255 255 / 39%) 0%, rgb(255 255 255 / 2%) 100%);
+    transition: all ease-in-out 0.1s;
+}
+
+.content .box-movies div.item:hover::before {
+    opacity: 1;
+}
+
+/* MODAL */
+
+.modal {
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    pointer-events: none;
+    transition: opacity ease-in-out 0.3s;
+    z-index: 2;
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 684px;
+    margin: 0 auto;
+    padding: 30px;
+    background: white;
+    border-radius: 10px;
+    text-align: center;
+    border: solid 10px #61D6B6;
+    overflow: hidden;
+}
+
+.modal-content h2 {
+    color: #22DAA8;
+    font-size: 32px;
+    text-transform: uppercase;
+    margin-bottom: 20px ;
+}
+
+.modal-content p {
+    color: #081F44;
+    font-size: 24px;
+    margin-bottom: 10px ;
+}
+
+.modal-content button.btn-action {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border-radius: 4px;
+    border: none;
+    background-color: #fd572e;
+    font-weight: 700;
+    font-size: 32px;
+    text-transform: uppercase;
+    color: white;
+    margin-top: 25px;
+    cursor: pointer;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.modal-content button.btn-action:hover {
+    background-color: #fe3f11;
+    transition: all ease-in-out 0.1s;
+}
+
+.modal-content button#reload {
+    display: block;
+    width: 100%;
+    padding: 22px 0 0 0;
+    border: none;
+    background-color: transparent;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 16px;
+    color: rgb(131, 131, 131);
+    cursor: pointer;
+}
+
+/* MODAL */
+
+.footer {
+    position: fixed;
+    bottom: 0;    
+    width: 100%;
+    padding: 0 0 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.footer a {
+    font-size: 16px;
+    color: #ffffff;
+    opacity: 0.45;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: opacity ease-in-out 0.2s;
+    text-align: center;
+}
+
+.footer a:hover {
+    opacity: 0.8;
+}
+
+/* MEDIA QUERYS */
+
+@media only screen and (max-width: 768px) {
+    .content h2 {
+        font-size: 28px;
+    }
+
+    .modal-content {
+        margin: 0 25px;
+        padding: 20px;
+        max-width: 480px;
+    }
+
+    .modal-content h2 {
+        font-size: 24px;
+    }
+
+    .modal-content p {
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    .modal-content button.btn-action {
+        font-size: 16px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .container {
+        margin: 0;
+    }
+
+    .brand img {
+        max-width: 128px;
+    }
+
+    .content h2 {
+        font-size: 20px;
+    }
+
+    .progress-bar {
+        max-width: 200px;
+        padding: 20px;
+    }
+    
+    .progress-bar .title  {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .modal-content {
+        margin: 0 20px;
+        padding: 15px;
+    }
+
+    .modal-content h2 {
+        font-size: 20px;
+    }
+
+    .modal-content p {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .modal-content button.btn-action {
+        font-size: 16px;
+        font-weight: 700;
+    }
+}
