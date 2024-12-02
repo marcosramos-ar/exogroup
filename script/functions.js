@@ -28,23 +28,46 @@ function updateMovies(step, key = null) {
 
     title.textContent = stepTexts[step];
     stepIndicator.textContent = step;
-    
+
+    // Mostrar un loader mientras se cargan las imágenes
+    const loader = document.createElement("div");
+    loader.classList.add("loader");
+    box.appendChild(loader);
+
     let movies;
     if (step === 1) {
         movies = data.movies.step1;
     } else {
         movies = data.movies[`step${step}`][key];
     }
-    
-    movies.forEach((movie, index) => {
+
+    const promises = movies.map((movie, index) => new Promise(resolve => {
         const item = document.createElement("div");
         item.classList.add("item");
-        item.innerHTML = `<img src="${movie.photo}" alt="Movie">`;
+
+        const img = document.createElement("img");
+        img.src = movie.photo;
+        img.alt = "Movie";
+
+        img.onload = () => {
+            item.appendChild(img);
+            resolve(item); // Resolver cuando el elemento esté listo
+        };
+
         item.addEventListener("click", () => handleSelection(step, movie.category || movie));
-        setTimeout(() => {
-            item.classList.add("appear");
-        }, index * 100);
-        box.appendChild(item);
+    }));
+
+    // Esperar a que todas las imágenes estén cargadas
+    Promise.all(promises).then(items => {
+        loader.remove(); // Ocultar el loader
+        items.forEach((item, index) => {
+            box.appendChild(item); // Agregar el elemento al DOM
+            
+            // Forzar un "repaint" antes de aplicar la clase `.appear`
+            setTimeout(() => {
+                item.classList.add("appear");
+            }, index * 100); // Aplicar animación escalonada
+        });
     });
 }
 
