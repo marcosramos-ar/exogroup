@@ -28,8 +28,7 @@ function updateMovies(step, key = null) {
 
     title.textContent = stepTexts[step];
     stepIndicator.textContent = step;
-
-    // Mostrar un loader mientras se cargan las imágenes
+    
     const loader = document.createElement("div");
     loader.classList.add("loader");
     box.appendChild(loader);
@@ -51,22 +50,20 @@ function updateMovies(step, key = null) {
 
         img.onload = () => {
             item.appendChild(img);
-            resolve(item); // Resolver cuando el elemento esté listo
+            resolve(item);
         };
 
         item.addEventListener("click", () => handleSelection(step, movie.category || movie));
     }));
-
-    // Esperar a que todas las imágenes estén cargadas
+    
     Promise.all(promises).then(items => {
-        loader.remove(); // Ocultar el loader
+        loader.remove();
         items.forEach((item, index) => {
-            box.appendChild(item); // Agregar el elemento al DOM
-            
-            // Forzar un "repaint" antes de aplicar la clase `.appear`
+            box.appendChild(item);
+                        
             setTimeout(() => {
                 item.classList.add("appear");
-            }, index * 100); // Aplicar animación escalonada
+            }, index * 100);
         });
     });
 }
